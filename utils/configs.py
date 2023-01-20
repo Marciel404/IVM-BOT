@@ -1,6 +1,6 @@
 configData = {
 
-  "token": "MTAxODk1ODA4Mzc2NDAwMjkxOQ.GvJLqq.AByiW1fuw8b2CQMl-b5-9RzjGzg28-ANiaAMD8",
+  "token": "",
 
   "mongokey": "mongodb+srv://Marciel:roPbLXJEEu5w0v4c@markuus.c1awv.mongodb.net/test?authSource=admin&replicaSet=atlas-4n715z-shard-0&readPreference=primary&ssl=true",
 
