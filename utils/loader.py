@@ -1,55 +1,30 @@
-import discord
 import os
-
+import json
 from discord.ext.commands import Bot as BotBase
-from .verify import ticketloader, bottonstaffloader, verifyticket
+from .intents import Intents
 
-class loadcogs():
-
-    def __init__(self, bot):
-
-        for filename in os.listdir('./commands'):
-
-            if filename.endswith('.py') and not filename.startswith('__'):
-
-                bot.load_extension('commands.{0}'.format(filename[:-3]))
-
-        for filename in os.listdir('./plugins'):
-
-            if filename.endswith('.py') and not filename.startswith('__'):
-
-                bot.load_extension('plugins.{0}'.format(filename[:-3]))
+with open("utils/config.json", "r" , encoding="UTF-8") as config:
+    configData = json.load(config)
 
 class client(BotBase):
 
-    def __init__(self, token, prefix):
-
-        self.token = token
-
+    def __init__(self):
         super().__init__(
-
-            command_prefix = prefix,
-
-            intents = discord.Intents.all(),
-
+            command_prefix = "IVM!",
             help_command = None,
-
-            case_insensitive = True
-            
+            intents = Intents,
         )
 
-    async def on_ready(self):
+    def __load_cogs__(self):
 
-        print(f'Eu entrei como {self.user}')
-
-        await bottonstaffloader(self)
-
-        await ticketloader(self)
+        for commands in os.listdir("./commands"):
+            if commands.endswith(".py") and not commands.startswith("__"):
+                self.load_extension("commands.{}".format(commands[:-3]))
         
-        await verifyticket(self)
+        for plugins in os.listdir("./plugins"):
+            if plugins.endswith(".py") and not plugins.startswith("__"):
+                self.load_extension("plugins.{}".format(plugins[:-3]))
 
-    def __start__(self):
-
-        loadcogs(self)
-
-        self.run(self.token)
+    def __run__(self):
+        self.__load_cogs__()
+        self.run(configData["token"])

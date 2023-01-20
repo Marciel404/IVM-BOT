@@ -1,0 +1,1 @@
+Para não dar problema na hora de compactar os arquivos mantenha esse arquivo dentro dessa pasta
