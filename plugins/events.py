@@ -32,15 +32,11 @@ class events(commands.Cog):
     async def on_message(self, message: discord.Message):
 
         if message.author == self.bot.user: return
-
         elif message.author.bot: return
-
         elif message.mention_everyone: return
 
         if "ticket-" in message.channel.name:
-
-            with open(f"./tickets/{message.channel.name}.txt", "a") as f:
-
+            with open(f"./tickets/{message.channel.name}.txt", "a", encoding="UTF-8") as f:
                 f.write(f"\n{message.author.name}: {message.content}")
     
     @commands.Cog.listener()

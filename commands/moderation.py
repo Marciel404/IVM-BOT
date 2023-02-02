@@ -2,7 +2,6 @@ import discord
 from discord import slash_command, option
 from discord.ext import commands
 from classes.buttons import ComandosStaff, KickButtons, Ticket
-from customclasses.embed import embedBuilder
 from utils.loader import configData
 from db.moderation import adv, ausen
 
@@ -12,37 +11,6 @@ class Moderation(commands.Cog):
     def __init__(self, bot:commands.Bot):
 
         self.bot = bot
-
-    @slash_command(name = 'teste')
-    async def teste(self, Interaction: discord.Interaction):
-
-        e = embedBuilder()
-
-        await Interaction.response.defer()
-
-        e.set_color(5454)
-
-        e.set_footer(text = "trr")
-
-        await Interaction.followup.send(embed=e)
-
-        e.set_title("Title")
-        e.remove_footer()
-
-        await Interaction.followup.send(embed=e)
-
-        e.remove_title()
-        e.set_description("teste")
-
-        await Interaction.followup.send(embed= e)
-
-        e.remove_description()
-        e.remove_colour()
-        e.set_footer(text = "5545")
-        e.add_field(name = "iif", value="dds")
-
-        await Interaction.followup.send(embed= e)
-
 
     @slash_command(name = "buttonsstaff", description = "Envia os botons de staff")
     @option(name = "channel", description = "Escolha o chat para mandar",)
@@ -320,7 +288,6 @@ class Moderation(commands.Cog):
 
         try:
             await interaction.response.send_message(file = discord.File('./tickets/ticket-{}.txt'.format(membro.id),f'Ticket de {membro.name}.txt'), ephemeral = True)
-
         except:
             await interaction.response.send_message('Esse membro ainda não abriu um ticket', ephemeral = True)
 

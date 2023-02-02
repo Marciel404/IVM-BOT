@@ -11,17 +11,17 @@ class adcrmvadivertência(discord.ui.View):
         super().__init__(timeout=timeout)
 
     @discord.ui.select(
-    placeholder = "Advivertencia",
-    options = [
-        discord.SelectOption(
-            label = 'Adicionar',
-            description = 'Adiciona uma advertencia'
-        ),
-        discord.SelectOption(
-            label = 'Remover',
-            description = 'Remove uma advertencia'
-        )
-        ]
+        placeholder = "Advivertencia",
+        options = [
+            discord.SelectOption(
+                label = 'Adicionar',
+                description = 'Adiciona uma advertencia'
+            ),
+            discord.SelectOption(
+                label = 'Remover',
+                description = 'Remove uma advertencia'
+            )
+            ]
     )
     async def select_callback(self, select, interaction: discord.Interaction):
 
