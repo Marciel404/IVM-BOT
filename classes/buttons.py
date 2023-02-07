@@ -39,10 +39,11 @@ class AdvRmvButtons(discord.ui.View):
     @discord.ui.button(label = '❎', style = discord.ButtonStyle.red, custom_id = "deny")
     async def denyadm(self, button: discord.ui.Button, interaction: discord.Interaction):...
 
-class Ticket(discord.ui.View):
+class Ticket(discord.ui.Button):
+
+    def __init__(self, **kwargs):
+        super().__init__(style=discord.ButtonStyle.blurple, label = kwargs.get("name"), custom_id = "abrirTicket")
     
-    @discord.ui.button(label = '🛎 Criar ticket', style = discord.ButtonStyle.blurple, custom_id = "abrirTicket")
-    async def ticket(self, button: discord.ui.Button, interaction: discord.Interaction):...
 
 class AdcCapEquipes(discord.ui.View):
     

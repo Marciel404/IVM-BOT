@@ -1,4 +1,5 @@
 import discord
+import hexacolors
 from discord import slash_command, option
 from discord.ext import commands
 from classes.buttons import ComandosStaff, KickButtons, Ticket
@@ -22,23 +23,33 @@ class Moderation(commands.Cog):
         await channel.send("", view = ComandosStaff())
     
     @slash_command(name = "ticketmessage", description = "Envia a mensagem do ticket")
+    @option(name = 'title', description = "Titulo da embed da mensagem")
+    @option(name = "description", description = "Descrição da embed da mensagem")
     @option(name = 'channel', description = "Chat para enviar a mensagem")
     @option(name = "category", description = "Categoria para abrir os tickets")
-    async def ticketmessage(self, interaction: discord.Interaction, channel: discord.TextChannel = None, category: discord.CategoryChannel = None):
+    async def ticketmessage(self,
+                            interaction: discord.Interaction,
+                            title: str,
+                            description: str = "",
+                            image: str = 'https://media.giphy.com/media/PfhDVTbCOsBxOMzemc/giphy.gif',
+                            channel: discord.TextChannel = None, 
+                            category: discord.CategoryChannel = None,
+                            namebutton: str = "🛎 Abrir ticket"
+                            ):
         
         if channel == None: channel = interaction.channel
         if category == None: category = channel.category
         
-        e = discord.Embed(title = 'Precisa de ajuda? Reaja a 🛎 para abrir um ticket',
-        description = 'Com os tickets você pode reportar algo ou tirar alguma dúvida.',
+        e = discord.Embed(title = title,
+        description = description,
         color = 0x4B0082)
         e.set_footer(text = f'Staff {interaction.guild.name}', icon_url = interaction.guild.icon)
-        e.set_image(url = 'https://media.giphy.com/media/PfhDVTbCOsBxOMzemc/giphy.gif')
+        e.set_image(url = image)
         e.set_footer(text = category.id)
+
+        await interaction.response.send_message("Preparando tudo", ephemeral = True)
         
-        await channel.send(embed = e, view = Ticket())
-        
-        await interaction.response.send_message("Prontinho", ephemeral = True)
+        await channel.send(embed = e, view = discord.ui.View(Ticket(name = namebutton)))
 
     @slash_command(guild_only = True,name = 'say', description = 'Envia uma mensagem em um chat')
     @option(name = 'canal', description = 'Escolha o canal que falar')
