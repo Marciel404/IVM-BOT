@@ -68,11 +68,8 @@ async def abrirTicket(selfbot, interaction):
 async def closeTicket(selfbot, interaction):
 
     member = interaction.guild.get_member(int(interaction.message.embeds[0].footer.text))
-
     admin = discord.utils.get(interaction.guild.roles, id = configData['roles']['staff']['admin'])
-        
     mod = discord.utils.get(interaction.guild.roles, id = configData['roles']['staff']['mod'])
-
     suporte = discord.utils.get(interaction.guild.roles, id = configData['roles']['staff']['suporte'])
 
     overwrites = {
@@ -96,16 +93,13 @@ async def closeTicket(selfbot, interaction):
 
     await interaction.message.delete()
 
-    msg = await interaction.channel.send(embed = e, view = AdonTicket2())
+    await interaction.channel.send(embed = e, view = AdonTicket2())
 
 async def openTicket(selfBot, interaction):
 
     member = interaction.guild.get_member(int(interaction.message.embeds[0].footer.text))
-
     admin = discord.utils.get(interaction.guild.roles, id = configData['roles']['staff']['admin'])
-        
     mod = discord.utils.get(interaction.guild.roles, id = configData['roles']['staff']['mod'])
-
     suporte = discord.utils.get(interaction.guild.roles, id = configData['roles']['staff']['suporte'])
 
     overwrites = {
@@ -129,8 +123,17 @@ async def openTicket(selfBot, interaction):
     e = discord.Embed(title=f'Ticket de {member} aberto 🔓')
     e.set_footer(text = member.id)
 
-    msg = await interaction.channel.send(embed = e, view = AdonTicket())
+    await interaction.channel.send(embed = e, view = AdonTicket())
 
 async def deleteTicket(selfbot, interaction):
+
+    member = interaction.guild.get_member(int(interaction.message.embeds[0].footer.text))
+
+    data_e_hora_atuais = datetime.now()
+    fuso_horario = timezone('America/Sao_Paulo')
+    data_e_hora_sao_paulo = data_e_hora_atuais.astimezone(fuso_horario)
+    dt = data_e_hora_sao_paulo.strftime('%d/%m/%Y %H:%M')
+
+    await interaction.guild.get_channel(configData["logs"]["ticket"]).send(content= f"Ticket de {member.name} {dt}",file = discord.File('./tickets/ticket-{}.txt'.format(member.id),f'Ticket de {member.name}.txt'))
 
     await interaction.channel.delete()

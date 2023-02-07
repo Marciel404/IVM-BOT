@@ -2,28 +2,52 @@ import discord
 from utils.loader import configData
 from pymongo import MongoClient
 #-----------------------------------------------------------------------------------------------------#
-cluster = MongoClient(configData['mongokey'])
+cluster = MongoClient(configData["mongokey"])
 
 db = cluster["IVM"]
-
-bank = db['bank']
+economy = db["economy"]
+mercado = db["mercado"]
 #-----------------------------------------------------------------------------------------------------#
-def update_bank(membro: discord.Member, IVMs: int):
+def update_bank(membro: discord.Member, REcoins: int):
 
     if membro is not None:
 
-        bank.update_one({"_id": membro.id}, {"$inc": {"IVMs": IVMs}}, upsert = True)
+        if (economy.count_documents({ "_id": membro.id}) == 0):
+
+            economy.insert_one({"_id": membro.id, "Nome": membro.name})
+
+        economy.update_one(
+            {"_id": membro.id},
+            {"$inc": {
+                    "REcoins": REcoins
+                }
+            },
+            upsert = True
+        )
 
 def update_inv(member, item: str, qnt: int):
 
     if member is not None:
 
-        bank.update_one(
+        economy.update_one(
             {"_id": member.id},
             {"$inc": {
-                    f"inventario.{item}": qnt
+                    f"inventario.{item.lower()}": qnt
                 }
             },
-        upsert = True
+            upsert = True
+        )
+
+def market_update(item: str, qual: str, valor: int):
+
+    if item is not None:
+
+        economy.update_one(
+            {"_id": "mercado"},
+            {"$set": {
+                    f"{item.lower()}.{qual.lower()}": valor
+                }
+            },
+            upsert = True
         )
 #-----------------------------------------------------------------------------------------------------#

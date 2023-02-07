@@ -1,5 +1,5 @@
 
-diamante: 0
-ouro: 0
-ferro: 0
-madeira: 0
+Diamante: 0
+Ouro: 0
+Ferro: 0
+Madeira: 0

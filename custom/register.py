@@ -2,7 +2,7 @@ import datetime
 import discord
 import pytz
 from discord.ext import commands
-from classes.register import Genero, Sexualidade, Relacionamento, Plataforma, Regiao
+from classes.cargos.register import Genero, Sexualidade, Relacionamento, Plataforma, Regiao
 from db.register import addpregistro
 from utils.loader import configData
 

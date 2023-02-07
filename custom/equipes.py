@@ -1,5 +1,5 @@
 import discord
-from classes.selectmenus import adcrmvcargosequipes
+from classes.cargos.selectmenus import adcrmvcargosequipes
 from utils.loader import configData
 
 async def adcCargosEquipes(selfbot, interaction):

@@ -5,7 +5,6 @@ from classes.buttons import ComandosStaff, KickButtons, Ticket
 from utils.loader import configData
 from db.moderation import adv, ausen
 
-
 class Moderation(commands.Cog):
 
     def __init__(self, bot:commands.Bot):

@@ -1,12 +1,57 @@
-frutos: list[dict[str,str | int]] = [
+from db.economy import mercado
 
-    {"name": "tilapia", "venda": 5},
-    {"name": "corvina", "venda": 5},
-    {"name": "camarão", "venda": 5},
-    {"name": "lula", "venda": 5},
-    {"name": "ostra", "venda": 5},
-    {"name": "lagosta", "venda": 5},
-    {"name": "caranguejo", "venda": 5},
-    {"name": "peixe", "venda": 5}
-    
-]
+async def on_frutos():
+
+    frutos: list[dict[str,str | int]] = [
+
+        {
+            "name": "Tilapia", 
+            "compra": mercado.find_one({"_id": "mercado"})["tilapia"]["compra"],
+            "venda": mercado.find_one({"_id": "mercado"})["tilapia"]["venda"]
+        },
+
+        {
+            "name": "Corvina", 
+            "compra": mercado.find_one({"_id": "mercado"})["corvina"]["compra"],
+            "venda": mercado.find_one({"_id": "mercado"})["corvina"]["venda"]
+        },
+
+        {
+            "name": "Camarão", 
+            "compra": mercado.find_one({"_id": "mercado"})["camarão"]["compra"],
+            "venda": mercado.find_one({"_id": "mercado"})["camarão"]["venda"]
+        },
+
+        {
+            "name": "Lula", 
+            "compra": mercado.find_one({"_id": "mercado"})["lula"]["compra"],
+            "venda": mercado.find_one({"_id": "mercado"})["lula"]["venda"]
+        },
+
+        {
+            "name": "Ostra", 
+            "compra": mercado.find_one({"_id": "mercado"})["ostra"]["compra"],
+            "venda": mercado.find_one({"_id": "mercado"})["ostra"]["venda"]
+        },
+
+        {
+            "name": "Lagosta", 
+            "compra": mercado.find_one({"_id": "mercado"})["lagosta"]["compra"],
+            "venda": mercado.find_one({"_id": "mercado"})["lagosta"]["venda"]
+        },
+
+        {
+            "name": "Caranguejo", 
+            "compra": mercado.find_one({"_id": "mercado"})["caranguejo"]["compra"],
+            "venda": mercado.find_one({"_id": "mercado"})["caranguejo"]["venda"]
+        },
+
+        {
+            "name": "Peixe", 
+            "compra": mercado.find_one({"_id": "mercado"})["peixe"]["compra"],
+            "venda": mercado.find_one({"_id": "mercado"})["peixe"]["venda"]
+        }
+        
+    ]
+
+    return frutos

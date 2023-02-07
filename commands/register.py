@@ -3,7 +3,7 @@ import discord
 from discord.ext import commands
 from datetime import datetime
 from pytz import timezone
-from classes.register import Idade
+from classes.cargos.register import Idade
 
 class registro(commands.Cog):
 
@@ -30,9 +30,6 @@ def setup(bot:commands.Bot):
     bot.add_cog(registro(bot))
 
 # data_e_hora_atuais = datetime.now()
-
 # fuso_horario = timezone('America/Sao_Paulo')
-
 # data_e_hora_sao_paulo = data_e_hora_atuais.astimezone(fuso_horario)
-
 # dt = data_e_hora_sao_paulo.strftime('%d/%m/%Y %H:%M')

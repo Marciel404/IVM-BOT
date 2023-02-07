@@ -1,9 +1,9 @@
 {
-    "token": "MTA2NDkzODk3OTQwNjkyMTczOA.G3ltZA.vv-GhAJUEH01JTuVgWtqILPosY-8blm2K9B0IU",
-    "mongokey": "mongodb+srv://Marciel:roPbLXJEEu5w0v4c@markuus.c1awv.mongodb.net/test?authSource=admin&replicaSet=atlas-4n715z-shard-0&readPreference=primary&ssl=true",
-    "topggkey": "",
+  "token": "MTA2NDkzODk3OTQwNjkyMTczOA.G3ltZA.vv-GhAJUEH01JTuVgWtqILPosY-8blm2K9B0IU",
+  "mongokey": "mongodb+srv://Marciel:roPbLXJEEu5w0v4c@markuus.c1awv.mongodb.net/test?authSource=admin&replicaSet=atlas-4n715z-shard-0&readPreference=primary&ssl=true",
+  "topggkey": "",
 
-    "guild": 1003002386706612354,
+  "guild": 1003002386706612354,
 
   "roles":{
 
@@ -193,7 +193,9 @@
 
     "cargos": 1026584714431168562,
 
-    "usocomandos": 1025892589313998938
+    "usocomandos": 1025892589313998938,
+
+    "ticket": 1071502914230693928
 
   },
 

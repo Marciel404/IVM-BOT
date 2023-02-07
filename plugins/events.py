@@ -2,17 +2,50 @@ import discord
 import custom
 
 from discord.ext import commands
-from utils.loader import configData
-from datetime import datetime
-from pytz import timezone
 from checks.moderation import verfyadv, verfypoints
 from db.moderation import adv
+from functions.defs import better_time
 
 class events(commands.Cog):
 
     def __init__(self, bot:commands.Bot):
 
         self.bot = bot
+
+    @commands.Cog.listener()
+    async def on_application_command_error(self, interaction: discord.Interaction, error):
+
+        errorEmoji: discord.Emoji = self.bot.get_emoji(1044750438978818049)
+
+        if isinstance(error, commands.CommandOnCooldown):
+
+            cd = round(error.retry_after)
+
+            if cd == 0:
+
+                cd = 1
+
+            await interaction.response.send_message(f'{errorEmoji} || {better_time(cd)}', ephemeral = True)
+
+        # if isinstance(error, NoVote):
+
+        #     await interaction.response.send_message(f"{errorEmoji} || {error}", ephemeral = True)
+        
+        if isinstance(error, commands.BotMissingPermissions):
+            
+            await interaction.response.send_message(f'{errorEmoji} || Eu não tenho permissão de {error.args} para utilizar isso')
+
+        if isinstance(error, commands.MissingPermissions):
+            
+            await interaction.response.send_message(f"{errorEmoji} || Você não tem permissão de {error.args} para utilizar isso", ephemeral = True)
+
+        if isinstance(error, commands.MemberNotFound):
+
+            await interaction.response.send_message(f'{errorEmoji} || Não encontrei esse membro')
+        
+        if error:
+
+            print(error)
 
     @commands.Cog.listener()
     async def on_member_join(self, member:discord.Member):

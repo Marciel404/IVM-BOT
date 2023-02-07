@@ -1,5 +1,5 @@
 import discord, asyncio
-from classes.selectmenus import adcrmvadivertência
+from classes.cargos.selectmenus import adcrmvadivertência
 
 from utils.loader import  configData
 from db.moderation import ausendb, desausendb
@@ -7,7 +7,7 @@ from db.moderation import adcadvdb, rmvadvdb
 from pytz import timezone
 from datetime import datetime
 from classes.modals import *
-from classes.selectmenus import *
+from classes.cargos.selectmenus import *
 
 async def ausencia(selfbot, interaction):
         
@@ -73,7 +73,7 @@ async def confirmBan(selfbot, interaction):
     or discord.utils.get(interaction.guild.roles, id = configData['roles']['staff']['admin']) in interaction.user.roles\
     or discord.utils.get(interaction.guild.roles, id = configData['roles']['staff']['mod']) in interaction.user.roles:
         
-        l1 = selfbot.get_channel(configData['logs']['mod'])
+        l1 = interaction.guild.get_channel(configData['logs']['mod'])
         membro = interaction.guild.get_member(int(interaction.message.embeds[0].footer.text))
         author = interaction.message.embeds[0].fields[1].value
         motivo = interaction.message.embeds[0].fields[2].value
